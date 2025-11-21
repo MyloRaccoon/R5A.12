@@ -22,11 +22,8 @@ def get_numbers(file_path) -> list[int]:
 
 def calcul_test3(fr,val,length_list):
     stat = (abs(val - length_list * 2 * fr * (1 - fr)) / (2 * sqrt(2 * length_list) * fr * (1 - fr)))
-    v1=abs(val - length_list * 2 * fr * (1 - fr))
-    v2=(2 * sqrt(2 * length_list) * fr * (1 - fr))
-    print(v1)
-    print(v2)
-    print(erfc(stat))
+
+    print("stat = ",erfc(stat))
     return erfc(stat)
 def number_suits(sequence):
     length_seq=len(sequence)
@@ -55,6 +52,9 @@ def good(res_calcul)->bool:
 
 def Test3(line):
     fr, val, length = number_suits(line)
+    print("fr : ",fr)
+    print("val : ",val)
+    print("length : ",length)
     res = calcul_test3(fr, val, length)
     print("Is good :",good(res))
 
