@@ -2,16 +2,14 @@ import csv
 from math import sqrt
 from math import erfc
 
-
-#Test 3
 def open_csv():
     with open('generator1.csv', newline='') as file:
         reader = csv.reader(file, delimiter=',')
         for row in reader:
             print(', '.join(row))
 
-def get_numbers(file_path) -> list[int]:
-    numbers = []
+def get_numbers(file_path:str) -> list[str]:
+    numbers:list[str] = []
     with open(file_path, newline='') as file:
         reader = csv.reader(file, delimiter=',')
         for row in reader:
@@ -20,7 +18,7 @@ def get_numbers(file_path) -> list[int]:
     return numbers
 
 
-def calcul_test3(fr,val,length_list):
+def calcul_test3(fr:float,val:float,length_list:int):
     stat = (abs(val - length_list * 2 * fr * (1 - fr)) / (2 * sqrt(2 * length_list) * fr * (1 - fr)))
     v1=abs(val - length_list * 2 * fr * (1 - fr))
     v2=(2 * sqrt(2 * length_list) * fr * (1 - fr))
@@ -28,7 +26,7 @@ def calcul_test3(fr,val,length_list):
     print(v2)
     print(erfc(stat))
     return erfc(stat)
-def number_suits(sequence):
+def number_suits(sequence:str):
     length_seq=len(sequence)
     c_1=0
     for i in sequence:
@@ -39,7 +37,7 @@ def number_suits(sequence):
     val=suit(sequence,length_seq)
     return fr,val,length_seq
 
-def suit(sequence,len):
+def suit(sequence:str,len:int):
     cpt=0
     for i in range(len):
         v=sequence[i-1]
@@ -47,18 +45,18 @@ def suit(sequence,len):
         if v!=v2:
             cpt+=1
     return cpt
-def good(res_calcul)->bool:
+def good(res_calcul:float)->bool:
     if res_calcul<0.01:
         return False
     return True
 
 
-def Test3(line):
+def Test3(line:str):
     fr, val, length = number_suits(line)
     res = calcul_test3(fr, val, length)
     print("Is good :",good(res))
 
-def recup_all_in_one(list):
+def recup_all_in_one(list:list[str]):
     result=""
     for i in list:
         result += i
@@ -77,6 +75,3 @@ if __name__ == '__main__':
     list_csv=get_numbers('generator2.csv')
     all_in_one=recup_all_in_one(list_csv)
     Test3(all_in_one)
-
-
-    #test3()
