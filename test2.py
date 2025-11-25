@@ -4,14 +4,16 @@ from scipy.special import gammaincc
 from csv_num_reader import get_numbers
 
 # n = 16 | m = 8
-def test2(number: list[int], N, M) -> bool:
+def test2(number: list[int], N = 16, M = 8, verbos = False) -> bool:
 
 	splited_number = []
 	i = 0
 	temp = []
 	for n in number:
+
 		temp.append(n)
 		i += 1
+
 		if i == M:
 			i = 0
 			splited_number.append(temp.copy())
@@ -27,6 +29,9 @@ def test2(number: list[int], N, M) -> bool:
 		prs.append(pr/M)
 
 
+	if verbos:
+		print(f'prs = {prs}')
+
 
 	weird_sum = 0
 	for pr in prs:
@@ -34,7 +39,13 @@ def test2(number: list[int], N, M) -> bool:
 
 	val = 4 * M * weird_sum
 
+	if verbos:
+		print(f'val = {val}')
+
 	igamcc = gammaincc(N/2, val/2)
+
+	if verbos:
+		print(f'igamcc = {igamcc}')
 
 	return igamcc
 
@@ -57,9 +68,9 @@ def main():
 def test():
 	n_str = '1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000'
 	n = list(map(int, list(n_str)))
-	res = test2(n, 10, 10)
+	res = test2(n, 10, 10, True)
 
 	assert res == 0.7064384496412808
 
 if __name__ == '__main__':
-	main()
+	test()
