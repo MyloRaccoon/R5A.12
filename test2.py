@@ -4,7 +4,7 @@ from scipy.special import gammaincc
 from csv_num_reader import get_numbers
 
 # n = 16 | m = 8
-def test2(number: list[int], N = 16, M = 8, verbos = False) -> bool:
+def test2(number: str, N = 200, M = 128, verbos = False) -> float:
 
 	splited_number = []
 	i = 0
@@ -24,7 +24,7 @@ def test2(number: list[int], N = 16, M = 8, verbos = False) -> bool:
 	for part in splited_number:
 		pr = 0
 		for n in part:
-			if n == 1:
+			if n == '1':
 				pr += 1
 		prs.append(pr/M)
 
@@ -49,25 +49,8 @@ def test2(number: list[int], N = 16, M = 8, verbos = False) -> bool:
 
 	return igamcc
 
-def main():
-	res = input('please select a generator file (1 or 2): ')
-	while res != '1' and res != '2':
-		res = input('please select a generator file (1 or 2: ')
-
-	file_path = f"generator{res}.csv"
-	numbers = get_numbers(file_path)
-	
-	i = 0
-	n_error = 0
-	for number in numbers:
-		if not test2(number, 16, 8) > 0.01:
-			print(f'test not passed for number at index {i}')
-			n_error += 1
-		i += 1
-
 def test():
-	n_str = '1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000'
-	n = list(map(int, list(n_str)))
+	n = '1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000'
 	res = test2(n, 10, 10, True)
 
 	assert res == 0.7064384496412808

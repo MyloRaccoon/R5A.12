@@ -1,14 +1,14 @@
 import math
 
-def test1(numbers, verbos = False):
+def test1(numbers: str, verbos = False) -> float:
 	n_size = len(numbers)
 
 	n_zero = 0
 	n_one = 0
 	for n in numbers:
 		match n:
-			case 0: n_zero += 1
-			case 1: n_one +=1
+			case '0': n_zero += 1
+			case '1': n_one +=1
 
 	fr = n_one * 1 + n_zero * (-1)
 
@@ -27,7 +27,12 @@ def test1(numbers, verbos = False):
 
 	return erfc
 
+def test():
+	n = '1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000'
+	res = test1(n, True)
+
+	assert res == 0.10959858339911599
+
 if __name__ == '__main__':
-	n_str = '1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000'
-	n = list(map(int, list(n_str)))
-	test1(n, True)
+	test()
+

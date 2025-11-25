@@ -1,6 +1,6 @@
 import csv
 
-def recup_all_in_one(list:list[str]):
+def recup_all_in_one(list:list[str]) -> str:
     result=""
     for i in list:
         result += i
