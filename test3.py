@@ -42,6 +42,7 @@ def suit(sequence:str,len:int):
         if v!=v2:
             cpt+=1
     return cpt
+
 def good(res_calcul:float)->bool:
     if res_calcul<0.01:
         return False
@@ -64,11 +65,8 @@ def recup_all_in_one(list:list[str]):
 
 
 if __name__ == '__main__':
-    #calcul_test3(42/100,52,100)
-    Test3("1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000")
     Test3("1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000")
     list_csv=get_numbers('generator1.csv')
-    print(list_csv)
     all_in_one=recup_all_in_one(list_csv)
     print(all_in_one)
     Test3(all_in_one)
