@@ -1,6 +1,7 @@
 import math
+from fonctions import get_numbers, recup_all_in_one
 
-def test1(numbers: str, verbos = False) -> float:
+def test1(numbers: str, verbos = True) -> bool:
 	n_size = len(numbers)
 
 	n_zero = 0
@@ -25,14 +26,23 @@ def test1(numbers: str, verbos = False) -> float:
 	if verbos:
 		print(f'erfc = {erfc}')
 
-	return erfc
+	return erfc > 0.01
 
-def test():
+def main():
 	n = '1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000'
-	res = test1(n, True)
+	assert test1(n, False)
+	print('')
 
-	assert res == 0.10959858339911599
+	print("Generator 1")
+	numbers = recup_all_in_one(get_numbers("generator1.csv"))
+	print(test1(numbers))
+
+	print('')
+
+	print("Generator 2")
+	numbers = recup_all_in_one(get_numbers("generator2.csv"))
+	print(test1(numbers))
 
 if __name__ == '__main__':
-	test()
+	main()
 

@@ -1,10 +1,23 @@
 import csv
 import math
 from scipy.special import gammaincc
-from csv_num_reader import get_numbers
+from fonctions import get_numbers, recup_all_in_one
 
-# n = 16 | m = 8
-def test2(number: str, N = 200, M = 128, verbos = False) -> float:
+# 6400/4 : pass pass
+# 3200/8 : pass pass
+# 1600/16: pass pass
+# 800/32 : fail fail
+# 400/64 : fail fail
+# 200/128: fail pass
+
+DEFAULT_N = 200
+DEFAULT_M = 128
+
+
+def test2(number: str, N = DEFAULT_N, M = DEFAULT_M, verbos = True) -> bool:
+
+	if verbos:
+		print(f'N = {N} | M = {M}')
 
 	splited_number = []
 	i = 0
@@ -29,8 +42,11 @@ def test2(number: str, N = 200, M = 128, verbos = False) -> float:
 		prs.append(pr/M)
 
 
-	if verbos:
-		print(f'prs = {prs}')
+	# if verbos:
+	# 	line = ''
+	# 	for pr in prs:
+	# 		line += (f'{pr} |')
+	# 	print(f'prs: {line}')
 
 
 	weird_sum = 0
@@ -47,13 +63,22 @@ def test2(number: str, N = 200, M = 128, verbos = False) -> float:
 	if verbos:
 		print(f'igamcc = {igamcc}')
 
-	return igamcc
+	return igamcc > 0.01
 
-def test():
+def main():
 	n = '1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000'
-	res = test2(n, 10, 10, True)
+	assert test2(n, 10, 10, False)
+	print('')
 
-	assert res == 0.7064384496412808
+	print("Generator 1")
+	numbers = recup_all_in_one(get_numbers("generator1.csv"))
+	print(test2(numbers))
+
+	print('')
+
+	print("Generator 2")
+	numbers = recup_all_in_one(get_numbers("generator2.csv"))
+	print(test2(numbers))
 
 if __name__ == '__main__':
-	test()
+	main()
