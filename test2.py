@@ -8,10 +8,13 @@ from fonctions import get_numbers, recup_all_in_one
 # 1600/16: pass pass
 # 800/32 : fail fail
 # 400/64 : fail fail
-# 200/128: fail pass
+# 200/128: fail pass X
+# 100/256: fail pass
+# 50/512 : fail pass
+# 25/1024: fail pass
 
-DEFAULT_N = 200
-DEFAULT_M = 128
+DEFAULT_N = 25
+DEFAULT_M = 1024
 
 
 def test2(number: str, N = DEFAULT_N, M = DEFAULT_M, verbos = True) -> bool:
@@ -41,14 +44,6 @@ def test2(number: str, N = DEFAULT_N, M = DEFAULT_M, verbos = True) -> bool:
 				pr += 1
 		prs.append(pr/M)
 
-
-	# if verbos:
-	# 	line = ''
-	# 	for pr in prs:
-	# 		line += (f'{pr} |')
-	# 	print(f'prs: {line}')
-
-
 	weird_sum = 0
 	for pr in prs:
 		weird_sum += (pr - 1/2)**2
@@ -66,8 +61,11 @@ def test2(number: str, N = DEFAULT_N, M = DEFAULT_M, verbos = True) -> bool:
 	return igamcc > 0.01
 
 def main():
+	print("NIST")
 	n = '1100100100001111110110101010001000100001011010001100001000110100110001001100011001100010100010111000'
-	assert test2(n, 10, 10, False)
+	res = test2(n, 10, 10)
+	assert res
+	print(res)
 	print('')
 
 	print("Generator 1")
