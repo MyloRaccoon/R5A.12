@@ -12,7 +12,9 @@ def test1(numbers: str, verbos = True) -> bool:
 			case '1': n_one +=1
 
 	fr = n_one * 1 + n_zero * (-1)
-
+	if verbos :
+		print("n_zero",n_zero)
+		print ("n_one", n_one)
 	if verbos:
 		print(f'fr = {fr}')
 
